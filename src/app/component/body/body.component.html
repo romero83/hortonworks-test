@@ -1,0 +1,70 @@
+<div *ngIf="repositories.total_count > 1000" class="alert alert-warning" role="alert">
+  <h4>Please, be aware that only the first 1000 search results are available if using Github API!</h4>
+  More info: <a href="https://developer.github.com/v3/search/" target="_blank">https://developer.github.com/v3/search/</a>
+</div>
+
+<ngb-tabset #tabs>
+  <ngb-tab>
+    <ng-template ngbTabTitle>
+      Repositories
+      <small class="badge badge-primary" title="Total count">{{ repositories.total_count }}</small>
+    </ng-template>
+    <ng-template ngbTabContent>
+      <div class="repoPagination">
+        <h5>You are currently on page: {{actualPage}}</h5>
+        <form class="form-inline" onsubmit="return false;">
+          Page: <input name="repositoryPage" [(ngModel)]="repositoryPage" (keyup)="changePageOnEnterKey($event)"
+                       class="form-control mr-sm-2" type="number" min="1" [max]="repoPageCount" step="1"
+                       placeholder="Enter page number" aria-label="Paging"> / {{repoPageCount}}
+          <button class="btn btn-success mr-sm-2 my-sm-0" (click)="changeRepositoryPage()">Go</button>
+          <small *ngIf="pageValidation" class="validationMessage">Page number exceeded!</small>
+        </form>
+      </div>
+
+      <div *ngFor="let info of repositories.items"
+           class="repositoryPanel">
+        <strong>URL:</strong> <a href="{{info.html_url}}" target="_blank">{{info.html_url}}</a><br>
+        <strong>Description:</strong> {{info.description}}<br>
+        <strong>Forks count:</strong> {{info.forks_count}}<br>
+        <strong>Stargazers count:</strong> {{info.stargazers_count}}<br>
+        <strong>Open issues count:</strong> {{info.open_issues_count}}<br>
+        <button type="button" class="btn btn-primary" (click)="loadIssues(info.full_name);">See open
+          issues
+        </button>
+        <button *ngIf="moreData.indexOf(info.id) === -1" type="button" class="btn btn-link"
+                (click)="moreData.push(info.id)">See more data
+        </button>
+        <div *ngIf="moreData.indexOf(info.id) !== -1" @fadeInOut class="moreData alert alert-info">
+          <strong>Owner:</strong> {{info.owner.login}} <img src="{{info.owner.avatar_url}}" width="50"><br>
+          <strong>Created at:</strong> {{info.created_at}}<br>
+          <strong>Updated at:</strong> {{info.updated_at}}<br>
+          etc.
+        </div>
+      </div>
+    </ng-template>
+  </ngb-tab>
+  <ngb-tab [disabled]="!seeIssueTab" id="openIssueTab">
+    <ng-template ngbTabTitle>
+      Open issues of {{exactRepositoryName}}
+      <small class="badge badge-primary" title="Total count">{{openIssues.total_count}}</small>
+    </ng-template>
+    <ng-template ngbTabContent>
+      <div class="repoPagination">
+        <h5>You are currently on page: {{actualIssuePage}}</h5>
+        <form class="form-inline" onsubmit="return false;">
+          Page: <input name="issuePage" [(ngModel)]="issuePage" (keyup)="changeIssuePageOnEnterKey($event)"
+                       class="form-control mr-sm-2" type="number" min="1" [max]="issuePageCount" step="1"
+                       placeholder="Enter page number" aria-label="Paging"> / {{issuePageCount}}
+          <button class="btn btn-success mr-sm-2 my-sm-0" (click)="loadIssues(null)">Go</button>
+          <small *ngIf="issuePageValidation" class="validationMessage">Page number exceeded!</small>
+        </form>
+      </div>
+
+      <p *ngIf="!isIssuesLoaded">Loading...</p>
+      <div *ngFor="let issue of openIssues.items"
+           class="repositoryPanel">
+        <strong><a href="{{issue.html_url}}" target="_blank">{{issue.title}}</a></strong><br>
+      </div>
+    </ng-template>
+  </ngb-tab>
+</ngb-tabset>

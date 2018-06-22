@@ -1,0 +1,83 @@
+@import "colors.less";
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('./assets/fonts/Roboto-Regular.woff2') format('woff2'),
+  url('./assets/fonts/Roboto-Regular.woff') format('woff'),
+  url('./assets/fonts/Roboto-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'geomanist';
+  src: url('./assets/fonts/Roboto-Bold.woff2') format('woff2'),
+  url('./assets/fonts/Roboto-Bold.woff') format('woff'),
+  url('./assets/fonts/Roboto-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg)
+  }
+  100% {
+    transform: rotate(360deg)
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  line-height: 1.42857;
+}
+
+body {
+  font-family: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  max-height: 100%;
+  padding: 0;
+  margin: 0;
+  color: @text-color;
+  overflow: hidden;
+}
+
+#programStarter {
+  height: 100%;
+  p {
+    position: relative;
+    width: 75px;
+    height: 75px;
+    top: 20%;
+  }
+}
+
+.longRunningProcessIcon {
+  border: 3px solid #60ba96;
+  -webkit-animation: spin 1s linear infinite;
+  animation: spin 1s linear infinite;
+  border-top: 3px solid #fff;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  margin: auto;
+}
+
+#content {
+  margin-top: 55px;
+  padding: 25px;
+  height: calc(~"100% - 55px");
+  overflow: auto;
+}
+
+.validationMessage {
+  color: red;
+  font-weight: bold;
+}

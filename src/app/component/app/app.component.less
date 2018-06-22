@@ -1,0 +1,106 @@
+@import "../../../colors.less";
+
+/deep/ .headerSubMenu {
+  .dx-submenu {
+    background-color: @text-color!important;
+    border: none!important;
+    .dx-menu-item {
+      color: #fff;
+      background-color: @text-color;
+    }
+    .dx-state-hover, .dx-state-active {
+      color: @green-color;
+    }
+  }
+  .dx-context-menu-content-delimiter {
+    background-color: @green-color!important;
+  }
+}
+
+#mainPanel {
+  height: 100%;
+  header {
+    background: @text-color;
+    position: fixed;
+    width: 100%;
+    z-index: 10;
+    padding: 0 10px;
+    #programTitle {
+      display: inline-block;
+      vertical-align: bottom;
+      margin: 5px 0;
+      font-size: 22px;
+      color: #fff;
+      fa-icon {
+        margin-right: 5px;
+      }
+    }
+    #headerMenu {
+      display: inline-block;
+      vertical-align: bottom;
+      margin: 5px;
+      color: #fff;
+      /deep/ .dx-menu-item {
+        color: #fff!important;
+        background: transparent;
+      }
+      /deep/ .dx-state-hover, .dx-state-active, .dx-menu-item-expanded {
+        color: @green-color!important;
+      }
+      /deep/ .dx-context-menu-container-border {
+        border: none;
+        border-bottom: 1px solid @green-color;
+      }
+    }
+    #rightHeader {
+      float: right;
+      margin: 5px;
+      #loggedUser {
+        fa-icon {
+          font-size: 22px;
+          display: inline-block;
+          vertical-align: middle;
+        }
+        color: #fff;
+        vertical-align: bottom;
+        display: inline-block;
+      }
+      countdown-timer {
+        color: #fff;
+        width: 50px;
+        vertical-align: middle;
+        display: inline-block;
+        margin: 2px 10px 0;
+      }
+    }
+  }
+  #content {
+    padding: 65px 20px 0;
+    overflow: auto;
+    height: calc(100% - 46px);
+    /deep/ h2 {
+      margin-top: 0;
+      margin-bottom: 15px;
+    }
+    /deep/ .formHeader {
+      margin: 15px 0;
+    }
+  }
+  footer {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    background: @text-color;
+    z-index: 10;
+    #footerRight {
+      float: right;
+      margin: 6px 10px;
+      .ui-button {
+        border: 1px solid #00A4e0;
+        background: #00A4e0;
+        padding: 3px 0;
+        margin-top: -2px;
+      }
+    }
+  }
+}

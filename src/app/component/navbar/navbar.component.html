@@ -1,0 +1,10 @@
+<div>
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+    <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+    <a class="navbar-brand" href="#">Github repository search</a>
+    <form class="form-inline">
+      <input autofocus name="repositoryName" [(ngModel)]="repositoryName" (keyup)="searchOnEnterKey($event)" class="form-control mr-sm-2" type="text" placeholder="Enter name" aria-label="Search">
+      <button class="btn btn-success mr-sm-2 my-sm-0" (click)="searchRepository()">Search</button>
+    </form>
+  </nav>
+</div>

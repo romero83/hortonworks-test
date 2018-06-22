@@ -1,0 +1,11 @@
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+<div id="content" *ngIf="isInitialized" [@fadeInOut]>
+  <div class="alert alert-danger" role="alert" *ngIf="isErrorOccured">
+    <h2>Error happened!</h2>
+    <p>{{errorMessage}}</p>
+    <button type="button" class="btn btn-secondary" (click)="closeError()">Remove error</button>
+  </div>
+
+  <app-navbar></app-navbar>
+  <app-body *ngIf="hasResponse" (loadingEventEmitter)="loadingEventHandler($event)"></app-body>
+</div>

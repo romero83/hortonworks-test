@@ -3,8 +3,8 @@
   More info: <a href="https://developer.github.com/v3/search/" target="_blank">https://developer.github.com/v3/search/</a>
 </div>
 
-<ngb-tabset #tabs>
-  <ngb-tab>
+<ngb-tabset #tabs [destroyOnHide]="false">
+  <ngb-tab id="repositoryTab">
     <ng-template ngbTabTitle>
       Repositories
       <small class="badge badge-primary" title="Total count">{{ repositories.total_count }}</small>
@@ -23,22 +23,27 @@
 
       <div *ngFor="let info of repositories.items"
            class="repositoryPanel">
-        <strong>URL:</strong> <a href="{{info.html_url}}" target="_blank">{{info.html_url}}</a><br>
-        <strong>Description:</strong> {{info.description}}<br>
-        <strong>Forks count:</strong> {{info.forks_count}}<br>
-        <strong>Stargazers count:</strong> {{info.stargazers_count}}<br>
-        <strong>Open issues count:</strong> {{info.open_issues_count}}<br>
-        <button type="button" class="btn btn-primary" (click)="loadIssues(info.full_name);">See open
-          issues
-        </button>
-        <button *ngIf="moreData.indexOf(info.id) === -1" type="button" class="btn btn-link"
-                (click)="moreData.push(info.id)">See more data
-        </button>
-        <div *ngIf="moreData.indexOf(info.id) !== -1" @fadeInOut class="moreData alert alert-info">
-          <strong>Owner:</strong> {{info.owner.login}} <img src="{{info.owner.avatar_url}}" width="50"><br>
-          <strong>Created at:</strong> {{info.created_at}}<br>
-          <strong>Updated at:</strong> {{info.updated_at}}<br>
-          etc.
+        <div class="halfPanel">
+          <strong>URL:</strong> <a href="{{info.html_url}}" target="_blank">{{info.html_url}}</a><br>
+          <strong>Description:</strong> {{info.description}}<br>
+          <strong>Forks count:</strong> {{info.forks_count}}<br>
+          <strong>Stargazers count:</strong> {{info.stargazers_count}}<br>
+          <strong>Open issues count:</strong> {{info.open_issues_count}}<br>
+          <button type="button" class="btn btn-primary" (click)="loadIssues(info.full_name);">See open
+            issues
+          </button>
+          <button *ngIf="moreData.indexOf(info.id) === -1" type="button" class="btn btn-link"
+                  (click)="moreData.push(info.id)">See more data
+          </button>
+          <div *ngIf="moreData.indexOf(info.id) !== -1" @fadeInOut class="moreData alert alert-info">
+            <strong>Owner:</strong> {{info.owner.login}} <img src="{{info.owner.avatar_url}}" width="50"><br>
+            <strong>Created at:</strong> {{info.created_at}}<br>
+            <strong>Updated at:</strong> {{info.updated_at}}<br>
+            etc.
+          </div>
+        </div>
+        <div class="halfPanel">
+          <canvas [id]="assembleId(info.id)"></canvas>
         </div>
       </div>
     </ng-template>

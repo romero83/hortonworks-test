@@ -54,9 +54,11 @@ Build and run project
 
 Go to the project main folder and run:
 > 1. npm install
+
 It will install all necessary artifacts.
 
 > 2. npm run build
+
 Note: **dist/** folder is already commited so you can skip **npm run build** command if you like.
 
 After the build process dist/ folder created with the production built items.

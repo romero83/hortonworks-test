@@ -51,17 +51,20 @@ http-server is a simple, zero-configuration command-line http server. It is powe
 Build and run project
 =============
 
+
 Go to the project main folder and run:
-> **npm run build**
-> Note: **dist/** folder is already commited so you can skip **npm run build** command if you like.
+> 1. npm install
+It will install all necessary artifacts.
+
+> 2. npm run build
+Note: **dist/** folder is already commited so you can skip **npm run build** command if you like.
 
 After the build process dist/ folder created with the production built items.
 Go to the dist/ folder and run:
-> http-server ./ -p3000 -c-1
+> 3. http-server ./ -p3000 -c-1
 
 Which will run a local webserver on port 3000.
-After start your favourite browser (e.g. Chrome) and type in the address bar:
-
+> 4. Start your favourite browser (e.g. Chrome) and type in the address bar:
 > http://localhost:3000/index.html
 
 Test project
